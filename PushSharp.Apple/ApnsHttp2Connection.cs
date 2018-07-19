@@ -115,19 +115,12 @@ namespace PushSharp.Apple
                     }
 
                     // Expired
-                    throw new PushSharp.Core.DeviceSubscriptonExpiredException {
-                        OldSubscriptionId = notification.DeviceToken,
-                        NewSubscriptionId = null,
-                        ExpiredAt = timestamp
+                    throw new ApnsNotificationException(ApnsNotificationErrorStatusCode.Unknown, new ApnsNotification(notification.DeviceToken)) {
                     };
                 }
 
                 // Get the reason
-                var reasonStr = json.Value<string> ("reason");
-
-                var reason = (ApnsHttp2FailureReason)Enum.Parse (typeof (ApnsHttp2FailureReason), reasonStr, true);
-
-                throw new ApnsHttp2NotificationException (reason, notification);
+                throw new ApnsNotificationException(ApnsNotificationErrorStatusCode.Unknown, new ApnsNotification(notification.DeviceToken, json));
             }
         }
     }

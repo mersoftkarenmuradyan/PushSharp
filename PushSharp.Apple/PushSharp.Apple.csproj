@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\HttpTwo\HttpTwo\HttpTwo.csproj" />
     <ProjectReference Include="..\PushSharp.Core\PushSharp.Core.csproj" />
   </ItemGroup>
 
